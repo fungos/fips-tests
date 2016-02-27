@@ -10,6 +10,7 @@ from mod import log
 from mod import util
 from mod import settings
 
+#-------------------------------------------------------------------------------
 # HACK: Find fips-deploy dir the hard way
 # TODO: Fips need pass to generators the fips-deploy dir ready to be used
 os_name = platform.system().lower()
@@ -28,21 +29,22 @@ deploy_path = util.get_deploy_dir("../fips", "fips-tests", {'name': items['confi
 
 #-------------------------------------------------------------------------------
 def get_generator_path() :
-    """find generator_binary exectuable, fail if not exists"""
+    """find util_generate_requires exectuable, fail if not exists"""
 
-    bin_path = os.path.abspath('{}/generator_binary{}'.format(deploy_path, extension))
+    bin_path = os.path.abspath('{}/util_generate_requires{}'.format(deploy_path, extension))
     print "TRY: " + bin_path
     if not os.path.isfile(bin_path) :
         os_name = platform.system().lower()
-        bin_path = '{}/generator_binary{}'.format(proj_path, extension)
+        bin_path = '{}/util_generate_requires{}'.format(proj_path, extension)
         bin_path = os.path.normpath(bin_path)
         print "TRY: " + bin_path
         
         if not os.path.isfile(bin_path) :
-            log.error("generator_binary executable not found")
+            log.error("util_generate_requires executable not found")
 
     print "FOUND: " + bin_path
     return bin_path
+#-------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------
 def generateHeader(hdrPath, funcName) :
